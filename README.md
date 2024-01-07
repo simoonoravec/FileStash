@@ -36,7 +36,7 @@ Recommeded version: 20
   1. *Follow the installation steps from above* ([How to install](#how-to-install))
   2. Stop the application if you already started it
   3. Install PM2 on your system `$ npm install pm2 -g`
-  4. Start the application with PM2 `$ pm2 start index.js --name Filetash`
+  4. Start the application with PM2 `$ pm2 start index.js --name FileStash`
   5. Configure PM2 to start on boot `$ pm2 startup`
   6. Save PM2 process list `$ pm2 save`
   7. Done!
