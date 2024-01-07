@@ -5,6 +5,7 @@
 > - Automatic file deletion after certain amount of time
 > - Ability to delete the file as the uploader
 > - Encryption? Maybe? (Must do it client-side to save server resources)
+> - Administrative GUI? Maybe?
 
 # TextStash
 A very simple pastebin/hastebin alternative
