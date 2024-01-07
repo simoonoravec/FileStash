@@ -1,28 +1,25 @@
 <%- include('./partials/header') %>
 <div class="center-absolute">
+    <h1>FileStash</h1>
     <div class="container">
         <div>
-            <form id="upload-form" enctype="multipart/form-data">
+            <form id="upload-form" enctype="multipart/form-data" style="margin-bottom: 1rem;">
                 <div class="text-center">
-                    <label class="file-input-btn" id="file-input-btn" for="file">Select a file</label>
+                    <div id="droparea">
+                        <label class="file-input-btn" id="file-input-btn" for="file">
+                            <span id="input-label">
+                                Click to select a file or drag and drop the file here
+                            </span>
+                            <span id="input-label-selected" style="display: none;">
+                                <span class="d-block" style="margin-bottom: .5rem;">Selected file:</span>
+                                <span id="file-name"></span>
+                                <span class="d-block">[<span id="file-size"></span>]</span>
+                            </span>
+                        </label>
+                    </div>
                     <input class="file-input" name="file" type="file" id="file">
                 </div>
             </form>
-
-            <div class="file-detail">
-                <p class="text-center">
-                    Selected file:
-                    <span class="d-block" id="file-name" style="text-overflow: ellipsis;">
-                        <i>NONE</i>
-                    </span>
-                </p>
-                <p class="text-center">
-                    Size:
-                    <span class="d-block" id="file-size">
-                        <i>NONE</i>
-                    </span>
-                </p>
-            </div>
 
             <button class="btn d-block m-auto" id="upload">Upload</button>
         </div>
