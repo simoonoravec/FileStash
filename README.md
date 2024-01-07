@@ -1,4 +1,4 @@
-> This application is in early stage of development, there might be security issues and some features might not be working
+> This application is in early stage of development, there may be some security issues and some features might not be working!
 
 > TODO:
 > - Redesign frontend
