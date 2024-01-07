@@ -1,0 +1,13 @@
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/notyf.min.js"></script>
+<script src="/static/js/main.js"></script>
+<script>
+    const config = Object.freeze(<%- JSON.stringify(CONFIG.public) %>);
+
+    const notyf = new Notyf({
+        position: {
+            x: 'center',
+            y: 'top'
+        }
+    });
+</script>
