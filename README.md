@@ -7,8 +7,8 @@
 > - Encryption? Maybe? (Must do it client-side to save server resources)
 > - Administrative GUI? Maybe?
 
-# TextStash
-A very simple pastebin/hastebin alternative
+# FileStash
+A very simple file sharing service
 
 Also check out [TextStash](https://github.com/simoonoravec/textstash) if you like this!
 # FileStash
