@@ -61,9 +61,14 @@ function addFile(id, stored_filename, name, size_kb, mime) {
     ]);
 }
 
+/**
+ * Finds a file in the database by ID
+ * @param {number} id File ID
+ * @returns Promise
+ */
 function getFile(id) {
     return new Promise((resolve, reject) => {
-        db.get(`SELECT * FROM files WHERE file_id = ?`, id, (err, res) => {
+        db.get(`SELECT * FROM files WHERE file_id = ?;`, id, (err, res) => {
             if (err || !res) {
                 reject();
             }
@@ -74,4 +79,20 @@ function getFile(id) {
     })
 }
 
-module.exports = { addFile, getFile };
+/**
+ * Delete a file from database
+ * @param {number} id File ID
+ */
+function deleteFileFromDB(id) {
+    db.prepare("DELETE FROM files WHERE file_id = ?;").run(id);
+}
+
+/**
+ * Returns the database connection
+ * @returns {sqlite.Database} Database
+ */
+function getDB() {
+    return db;
+}
+
+module.exports = { addFile, getFile, deleteFileFromDB, getDB };

@@ -3,7 +3,6 @@ const utils = require('../app/utils');
 const db = require('../app/database');
 const crypto = require('crypto');
 const path = require('path');
-const mime = require('mime');
 
 const express = require('express'),
     router = express.Router();

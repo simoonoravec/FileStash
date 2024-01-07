@@ -5,9 +5,12 @@
         <p class="download-title">You have requested a file for download</p>
         <p id="file-name"><i><%= atob(file.original_name) %></i></p>
         <p>Size: <%= file.sizeHr %></p>
-        <a href="/<%= file.file_id %>/download"><button class="btn">Download</button></a>
+        <a href="/<%= file.file_id %>/download" onclick="notyf.success('Download started');"><button class="btn">Download</button></a>
         <% if (previewable) { %>
         <a href="/<%= file.file_id %>/view"><button class="btn">View</button></a>
+        <% } %>
+        <% if (timeUntilDeletion) { %>
+        <p><small>This file will expire in <%= timeUntilDeletion %></small></p>
         <% } %>
     </div>
 </div>

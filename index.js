@@ -17,6 +17,14 @@ log(logLevel.INFO, `Initializing data directory...`);
 utils.initializeDataDir(logLevel.INFO);
 
 /**
+ * Initialize expired files cleanup
+ */
+if (config.delete_after > 0) {
+    utils.oldFileCleanup();
+    setInterval(utils.oldFileCleanup, 300000);
+}
+
+/**
  * Initialize Web server
  */
 log(logLevel.INFO, `Initializing Web server (Express)`);

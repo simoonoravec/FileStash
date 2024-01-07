@@ -6,6 +6,7 @@ const path = require('path');
 const config = require('../config');
 const db = require('../app/database');
 const utils = require('../app/utils');
+const fs = require('fs');
 
 /**
  * Home page
@@ -21,10 +22,12 @@ router.get('/:id', (req, res) => {
     db.getFile(req.params.id).then((file) => {
         file.sizeHr = utils.humanReadableSize(file.size_kb);
         const previewable = utils.isPreviewable(file.mime);
-        res.render('download', {file, previewable});
+
+        let timeUntilDeletion = utils.getTimeUntilDeletion(file.upload_time);
+
+        res.render('download', {file, previewable, timeUntilDeletion});
     }).catch((err) => {
-        console.log("ERROR");
-        res.end();
+        res.render('error', {error: "404 - File Not Found"});
     });
 });
 
@@ -33,9 +36,16 @@ router.get('/:id', (req, res) => {
  */
 router.get('/:id/download', (req, res) => {
     db.getFile(req.params.id).then((file) => {
-        res.download(path.join(config.data_dir, file.real_filename), atob(file.original_name));
+        const fpath = path.join(config.data_dir, file.real_filename);
+
+        if (!fs.existsSync(fpath)) {
+            res.render('error', {error: "Well, this is strange... The entry exists in the database but the file wasn't found on the disk."});
+            return;
+        }
+
+        res.download(fpath, atob(file.original_name));
     }).catch((err) => {
-        res.send("404 Not Found");
+        res.render('error', {error: "404 - File Not Found"});
     });
 });
 
@@ -45,7 +55,7 @@ router.get('/:id/download', (req, res) => {
 router.get('/:id/view', (req, res) => {
     db.getFile(req.params.id).then((file) => {
         if (!utils.isPreviewable(file.mime)) {
-            res.send("This file type cannot be viewed.");
+            res.render('error', {error: "This file type cannot be viewed."});
             return;
         }
 
@@ -53,10 +63,16 @@ router.get('/:id/view', (req, res) => {
             file.mime = "text/plain";
         }
 
+        const fpath = path.join(config.data_dir, file.real_filename);
+        if (!fs.existsSync(fpath)) {
+            res.render('error', {error: "Well, this is strange... The entry exists in the database but the file wasn't found on the disk."});
+            return;
+        }
+
         res.set('Content-type', file.mime);
-        res.sendFile(path.join(config.data_dir, file.real_filename));
+        res.sendFile(fpath);
     }).catch((err) => {
-        res.send("404 Not Found");
+        res.render('error', {error: "404 - File Not Found"});
     });
 });
 
