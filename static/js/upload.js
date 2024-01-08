@@ -1,3 +1,7 @@
+/**
+ * Event
+ * Fires when a file is selected
+ */
 $("#file").on('change', function () {
     const fileName = this.value.split('\\').pop().split('/').pop();
 
@@ -14,6 +18,10 @@ $("#file").on('change', function () {
     $("#input-label-selected").show();
 });
 
+/**
+ * Event
+ * Fires when a file is dragged over the "drop area"
+ */
 $("#droparea").on('dragover', function (e) {
     e.preventDefault();  
     e.stopPropagation();
@@ -21,6 +29,10 @@ $("#droparea").on('dragover', function (e) {
     $("#input-label").text("Release your mouse to drop the file");
 });
 
+/**
+ * Event
+ * Fires when a dragged file leaves the "drop area"
+ */
 $("#droparea").on('dragleave', function (e) {
     e.preventDefault();  
     e.stopPropagation();
@@ -28,6 +40,10 @@ $("#droparea").on('dragleave', function (e) {
     $("#input-label").text("Click to select a file or drag and drop the file here");
 });
 
+/**
+ * Event
+ * Fires when a file is dropped into the "drop area"
+ */
 $("#droparea").on('drop', function (e) {
     e.preventDefault();  
     e.stopPropagation();
@@ -35,6 +51,8 @@ $("#droparea").on('drop', function (e) {
     $("#input-label").text("Click to select a file or drag and drop the file here");
 
     const files = e.originalEvent.dataTransfer.files;
+
+    //This is needed because not only files, but text can also be dragged and dropped
     if (files.length == 0) {
         notyf.error("Only files are supported!");
         return;
@@ -46,9 +64,16 @@ $("#droparea").on('drop', function (e) {
     }
 
     document.getElementById('file').files = files;
+
+    // The "change" event doesn't get triggered when I change the
+    // value of "file" using JS, so I have to tirgger it manualy.
     $('#file').trigger('change');
 });
 
+/**
+ * Enable (0) or Disable (1) the file selection
+ * @param {number} val Value
+ */
 function setState(val) {
     switch (val) {
         case 0:
@@ -64,6 +89,10 @@ function setState(val) {
     }
 }
 
+/**
+ * Event
+ * Fires when the "Upload" button is clicked
+ */
 $("#upload").on('click', function() {
     setState(1);
 

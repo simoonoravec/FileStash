@@ -10,7 +10,7 @@
         <a href="/<%= file.file_id %>/view"><button class="btn">View</button></a>
         <% } %>
         <% if (timeUntilDeletion) { %>
-        <p><small>This file will expire in <%= timeUntilDeletion %></small></p>
+        <p class="expire-reminder">This file will expire in <b><%= timeUntilDeletion %></b></p>
         <% } %>
     </div>
 </div>

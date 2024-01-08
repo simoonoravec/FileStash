@@ -50,7 +50,7 @@ router.get('/:id/download', (req, res) => {
 });
 
 /**
- * View
+ * View a previewable file
  */
 router.get('/:id/view', (req, res) => {
     db.getFile(req.params.id).then((file) => {
@@ -59,7 +59,7 @@ router.get('/:id/view', (req, res) => {
             return;
         }
 
-        if (file.mime == "text/html") {
+        if (file.mime.startsWith('text/')) {
             file.mime = "text/plain";
         }
 

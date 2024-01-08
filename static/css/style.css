@@ -1,20 +1,21 @@
+/* Load the font and use it globally */
+
 @font-face {
     font-family: 'Fira Code';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(/static/fonts/fira_code.woff2) format('woff2');
+    src: url(/static/vendor/fonts/fira_code.woff2) format('woff2');
 }
 
 * {
     font-family: 'Fira Code', Arial, Helvetica, sans-serif !important;
 }
 
-
+/* Base classes */
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #141414;
     color: #e0e0e0;
 }
@@ -29,6 +30,7 @@ body {
     text-overflow: ellipsis;
 }
 
+/* Mobile/Desktop optimizations */
 @media only screen and (max-width: 480px) {
     .container {
        width: 85%;
@@ -50,6 +52,20 @@ body {
     }
 }
 
+/* Helpers */
+.d-block {
+    display: block;
+}
+
+.m-auto {
+    margin: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Form classes */
 .file-input {
     display: none;
 }
@@ -72,18 +88,6 @@ body {
     background-color: #292929;
 }
 
-.text-center {
-    text-align: center;
-}
-
-.d-block {
-    display: block;
-}
-
-.m-auto {
-    margin: auto;
-}
-
 .btn {
     font-size: 16px;
     background-color: #080808;
@@ -99,6 +103,7 @@ body {
     background-color: #111111;
 }
 
+/* Additional stuff */
 .download-title {
     font-size: 18px;
     font-weight: bold;
@@ -118,4 +123,33 @@ h1 {
     color: rgb(212, 0, 0);
     margin-top: 0;
     font-size: 18px;
+}
+
+.expire-reminder {
+    margin-top: 2rem;
+    font-size: 14px;
+}
+
+/* Footer */
+.footer {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    color: #afafaf;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #bebebe;
+    transition: 100ms all;
+}
+
+.footer a:hover {
+    color: #dbdbdb;
 }
