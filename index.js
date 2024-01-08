@@ -2,11 +2,54 @@ require('dotenv').config();
 
 global.app_version = require("./package.json").version;
 
+const fs = require('fs');
+
+if (!fs.existsSync(__dirname + '/config.js')) {
+    console.error('Config file not found!');
+    process.exit(1);
+}
+
+const config = require('./config');
+
+//Validate config
+if (
+    !config.http_port
+    || typeof config.http_port != 'number'
+    || config.http_port % 1 != 0
+
+    || !config.data_dir
+    || config.data_dir.length == 0
+    
+    || !config.id_generator
+    || !['random', 'phoenic'].includes(config.id_generator)
+
+    || !config.id_bytes
+    || typeof config.id_bytes != 'number'
+    || config.id_bytes < 1
+    || config.id_bytes % 1 != 0
+
+    || !config.delete_after
+    || typeof config.delete_after != 'number'
+    || config.delete_after < 0
+    || config.delete_after % 1 != 0
+
+    || !config.public
+    || typeof config.public != 'object'
+    || !config.public.file_max_size
+    || config.public.file_max_size < 1
+    || config.public.file_max_size % 1 != 0
+) {
+    console.error('Invalid config file! (Missing or invalid variables)');
+    process.exit(1);
+} else {
+    if (process.env.NODE_ENV == 'development') {
+        console.log("Config validation OK.");
+    }
+}
+
 const fileUpload = require('express-fileupload');
 const { log, logLevel } = require('./app/logger');
 const utils = require('./app/utils');
-
-const config = require("./config");
 
 log(logLevel.INFO, `FileStash starting up...`);
 
