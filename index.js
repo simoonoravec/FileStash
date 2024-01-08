@@ -119,3 +119,14 @@ if (process.env.NODE_ENV != 'development') {
 webServer.listen(config.http_port, () => {
     log(logLevel.INFO, `FileStash Web server listening on port ${config.http_port}`);
 });
+
+/**
+ * Shutdown hook
+ */
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
+
+function shutdown() {
+    webServer.close();
+    require('./app/database').close(() => process.exit(0));
+}
