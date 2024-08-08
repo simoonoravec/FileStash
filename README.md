@@ -10,7 +10,7 @@
 # FileStash
 A very simple file sharing service
 
-Also check out [TextStash](https://github.com/simoonoravec/textstash) if you like this!
+Also check out [TextStash](https://gitlab.com/simoonoravec/textstash) if you like this!
 # FileStash
 A very simple file sharing service
 
